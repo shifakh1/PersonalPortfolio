@@ -1,4 +1,4 @@
- // DOM Content Loaded
+  // DOM Content Loaded
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize theme
             initTheme();
