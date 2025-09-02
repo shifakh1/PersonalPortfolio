@@ -1,4 +1,4 @@
-  /* CSS Variables for Theming */
+ /* CSS Variables for Theming */
         :root {
             --primary-color: #4a6cf7;
             --secondary-color: #6f42c1;
@@ -595,6 +595,7 @@
             background: var(--primary-color);
             border-radius: 3px;
             transition: var(--transition);
+            z-index: 1;
         }
 
         .skill-category:hover h3::after {
@@ -1010,6 +1011,7 @@
             pointer-events: none;
         }
 
+        .form-group.focused label,
         .form-group input:focus ~ label,
         .form-group textarea:focus ~ label,
         .form-group input:valid ~ label,
@@ -1056,6 +1058,29 @@
 
         .submit-btn:hover::before {
             left: 100%;
+        }
+
+        /* Form validation styles */
+        .error-message {
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .form-group.error input,
+        .form-group.error textarea {
+            border-color: var(--accent-color);
+        }
+
+        .form-success {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
         }
 
         /* Footer */
@@ -1427,5 +1452,4 @@
 
         .mt-20 {
             margin-top: 20px;
-            
         }

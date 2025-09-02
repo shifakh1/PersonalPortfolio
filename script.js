@@ -204,7 +204,7 @@
 
         // Contact Form Functionality
         function initContactForm() {
-            const contactForm = document.querySelector('.contact-form');
+            const contactForm = document.getElementById('contactForm');
             
             if (contactForm) {
                 // Add floating labels functionality
@@ -230,9 +230,10 @@
                     e.preventDefault();
                     
                     // Simple form validation
-                    const nameInput = this.querySelector('input[type="text"]');
-                    const emailInput = this.querySelector('input[type="email"]');
-                    const messageInput = this.querySelector('textarea');
+                    const nameInput = this.querySelector('#name');
+                    const emailInput = this.querySelector('#email');
+                    const messageInput = this.querySelector('#message');
+                    const successMessage = this.querySelector('#formSuccess');
                     
                     let isValid = true;
                     
@@ -269,13 +270,18 @@
                         submitBtn.disabled = true;
                         
                         setTimeout(() => {
-                            alert('Thank you for your message! I will get back to you soon.');
+                            successMessage.style.display = 'block';
                             this.reset();
                             
                             // Remove focused class from all inputs
                             formInputs.forEach(input => {
                                 input.parentNode.classList.remove('focused');
                             });
+                            
+                            // Hide success message after 5 seconds
+                            setTimeout(() => {
+                                successMessage.style.display = 'none';
+                            }, 5000);
                             
                             submitBtn.textContent = originalText;
                             submitBtn.disabled = false;
@@ -289,13 +295,10 @@
                 
                 const error = document.createElement('small');
                 error.className = 'error-message';
-                error.style.color = 'red';
-                error.style.display = 'block';
-                error.style.marginTop = '5px';
                 error.textContent = message;
                 
                 input.parentNode.appendChild(error);
-                input.style.borderColor = 'red';
+                input.parentNode.classList.add('error');
             }
             
             function clearError(input) {
@@ -303,7 +306,7 @@
                 if (error) {
                     error.remove();
                 }
-                input.style.borderColor = '';
+                input.parentNode.classList.remove('error');
             }
             
             function isValidEmail(email) {
