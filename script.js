@@ -1,4 +1,4 @@
-  // DOM Content Loaded
+ // DOM Content Loaded
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize theme
             initTheme();
@@ -31,6 +31,12 @@
             
             // Animate skills on page load
             animateSkills();
+            
+            // Initialize reading progress bar
+            initReadingProgress();
+            
+            // Initialize navbar hide on scroll
+            initNavbarHide();
         });
 
         // Theme Switching Functionality
@@ -427,6 +433,42 @@
                 
                 container.appendChild(particle);
             }
+        }
+
+        // Reading Progress Bar
+        function initReadingProgress() {
+            const progressBar = document.getElementById('reading-progress');
+            
+            window.addEventListener('scroll', function() {
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight - windowHeight;
+                const scrollPosition = window.scrollY;
+                
+                const progress = (scrollPosition / documentHeight) * 100;
+                progressBar.style.width = `${progress}%`;
+            });
+        }
+
+        // Navbar Hide on Scroll
+        function initNavbarHide() {
+            const nav = document.getElementById('nav');
+            let lastScrollY = window.scrollY;
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 200) {
+                    if (lastScrollY < window.scrollY) {
+                        // Scrolling down
+                        nav.classList.add('hidden');
+                    } else {
+                        // Scrolling up
+                        nav.classList.remove('hidden');
+                    }
+                } else {
+                    nav.classList.remove('hidden');
+                }
+                
+                lastScrollY = window.scrollY;
+            });
         }
 
         // Additional utility functions
